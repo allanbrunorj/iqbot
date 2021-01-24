@@ -12,6 +12,3 @@ class IQUser:
 
     def close(self):
         self.API.close_connection()
-
-
-

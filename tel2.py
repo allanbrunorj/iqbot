@@ -9,7 +9,7 @@ from telegram.ext import (
     ConversationHandler,
     CallbackContext,
 )
-
+from iqoptionapi.stable_api import IQ_Option
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -31,12 +31,13 @@ def email(update: Update, context: CallbackContext) -> int:
     update.message.reply_text('Insira a sua senha da IQOption')
 
     return PASSWORD
-
+'''
 def password(update: Update, context: CallbackContext) -> int:
     context.user_data['password_iq'] = update.message.text
     print(context.user_data['email_iq'], context.user_data['password_iq'])
     try:
         context.user_data['iq_object'].close()
+        del context.user_data['iq_object']
         print('del na iq')
     except:
         print('nao deletou iq(nao existe)')
@@ -54,7 +55,21 @@ def password(update: Update, context: CallbackContext) -> int:
 
     update.message.reply_text('Conta inválida. Insira o e-mail novamente:')
     return EMAIL
+'''
+def password(update: Update, context: CallbackContext) -> int:
+    context.user_data['password_iq'] = update.message.text
+    email, password = context.user_data['email_iq'], context.user_data['password_iq']
+    print(email, password, sep=' - ')
+    api = IQ_Option(email, password)
+    api.connect()
+    check = api.check_connect()
+    print(check)
+    if check:
+        update.message.reply_text('Logado com sucesso!')
+        return ConversationHandler.END
 
+    update.message.reply_text('Conta inválida. Insira o e-mail novamente:')
+    return EMAIL
 
 def status(update, context):
     pass
