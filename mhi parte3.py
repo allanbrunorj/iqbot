@@ -37,7 +37,7 @@ def Payout(par):
 	return d
 
 
-API = IQ_Option('allanbrunorj@hotmail.com', 'Nacional123@')
+API = IQ_Option('user', 'password')
 API.connect()
 
 API.change_balance('PRACTICE') # PRACTICE / REAL
