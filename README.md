@@ -1,7 +1,6 @@
 # iqbot
 
-Este projeto é um bot telegram por onde é possível operar com métodos conhecidos na comunidade de trading de forma automática.
-
+Este projeto é um bot telegram feito em Python, por onde é possível operar opções binárias de forma automática com métodos conhecidos e validados na comunidade.
 O bot permite definir:
 - Tamanho do aporte
 - Valores para hault
